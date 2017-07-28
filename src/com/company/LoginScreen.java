@@ -123,6 +123,7 @@ public class LoginScreen extends Application
 
     private DatabaseAPI setDatabaseAccess(String username, String password)
     {
+        // TODO: make the databse connection a private data member. won't be able to pass this object to a different class
         try
         {
             DatabaseAPI db = new DatabaseAPI(username, password);
