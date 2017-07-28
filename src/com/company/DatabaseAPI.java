@@ -23,17 +23,15 @@ import java.io.*;
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
-    private String password = "root"; //Chrome11"; // on laptop password is "root"
-    private String username = "root";
+    private String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
+    private String username = "DefaultUser"; // default username
     private Connection conn;
 
     // class constructor that throws an exception to the function caller
     DatabaseAPI() throws java.sql.SQLException, java.lang.ClassNotFoundException
     {
-        String password = "root"; //Chrome11"; // on laptop password is "root"
-        String username = "root";
         Class.forName("com.mysql.jdbc.Driver");
-        this.conn = DriverManager.getConnection(connectionString, username, password);
+        this.conn = DriverManager.getConnection(connectionString, this.username, this.password);
         System.out.println("Database connection established");
     }
 

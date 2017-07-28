@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sun.rmi.runtime.Log;
 
+import javax.xml.crypto.Data;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,8 +42,9 @@ public class LoginScreen extends Application
     Button btn;
     TextField userTextField;
     PasswordField pwBox;
-    private String username;
-    private String password;
+
+    // private String username;
+    // private String password;
 
     public static void main(String[] args)
     {
@@ -77,7 +79,7 @@ public class LoginScreen extends Application
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         // Add in the text, labels and text Fields
-        Text sceneTitle = new Text("Welcome");
+        Text sceneTitle = new Text("Get Permission to Insert");
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(sceneTitle, 0, 0, 2, 1);
 
@@ -93,7 +95,7 @@ public class LoginScreen extends Application
         pwBox = new PasswordField(); // text field for the password
         grid.add(pwBox, 1, 2);
 
-        btn = new Button("Sign in");
+        btn = new Button("Authenticate");
         btn.setOnAction(e -> setUsernamePassword());
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -109,11 +111,34 @@ public class LoginScreen extends Application
     private void setUsernamePassword()
     {
         btn.setTextFill(Color.FIREBRICK);
-        username = userTextField.getText();
-        password = pwBox.getText();
+        String username = userTextField.getText();
+        String password = pwBox.getText();
+
+        setDatabaseAccess(username, password);
 
         // TODO: comment this out after testing
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
+    }
+
+    private DatabaseAPI setDatabaseAccess(String username, String password)
+    {
+        try
+        {
+            DatabaseAPI db = new DatabaseAPI(username, password);
+            System.out.println("Admin Database connection established");
+            return db;
+        }
+        catch (SQLException e)
+        {
+            AlertError.showSQLException();
+        }
+        catch (ClassNotFoundException e)
+        {
+            AlertError.showClassNotFoundException();
+        }
+
+        System.err.println("The database connection could not be made");
+        return null; // only returns this if the Database connection could not be made
     }
 }
