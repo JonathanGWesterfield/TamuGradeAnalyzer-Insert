@@ -21,6 +21,7 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,23 +48,35 @@ public class LoginScreen extends Application
     {
         launch(args);
     }
+
     @Override
     public void start(Stage primaryStage)
     {
-        primaryStage.setTitle("JavaFX Welcome");
-        primaryStage.setScene(scene);
+        LoginScreen login = new LoginScreen();
+        primaryStage.setTitle("Insert Into TamuData Database");
+        primaryStage.setScene(login.getScene());
         primaryStage.show();
+    }
+
+    public LoginScreen()
+    {
+        setGrid();
+    }
+
+    public Scene getScene()
+    {
+        return scene;
     }
 
     private void setGrid()
     {
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        // Addint the text, labels and text Fields
+        // Add in the text, labels and text Fields
         Text sceneTitle = new Text("Welcome");
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(sceneTitle, 0, 0, 2, 1);
@@ -81,6 +94,7 @@ public class LoginScreen extends Application
         grid.add(pwBox, 1, 2);
 
         btn = new Button("Sign in");
+        btn.setOnAction(e -> setUsernamePassword());
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
