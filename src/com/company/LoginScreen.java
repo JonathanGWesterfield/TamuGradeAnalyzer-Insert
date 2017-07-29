@@ -39,7 +39,8 @@ public class LoginScreen extends Application
 {
     private GridPane grid;
     private Scene scene;
-    Button btn;
+    Button auth;
+    Button cancel;
     TextField userTextField;
     PasswordField pwBox;
 
@@ -95,12 +96,16 @@ public class LoginScreen extends Application
         pwBox = new PasswordField(); // text field for the password
         grid.add(pwBox, 1, 2);
 
-        btn = new Button("Authenticate");
-        btn.setOnAction(e -> setUsernamePassword());
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
+        auth = new Button("Authenticate");
+        auth.setOnAction(e -> setUsernamePassword());
+
+        cancel = new Button("Cancel");
+        cancel.setOnAction(e -> exit());
+
+        HBox hbauth = new HBox(10);
+        hbauth.setAlignment(Pos.BOTTOM_RIGHT);
+        hbauth.getChildren().addAll(auth, cancel);
+        grid.add(hbauth, 1, 4);
 
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
@@ -110,7 +115,7 @@ public class LoginScreen extends Application
 
     private void setUsernamePassword()
     {
-        btn.setTextFill(Color.FIREBRICK);
+        auth.setTextFill(Color.FIREBRICK);
         String username = userTextField.getText();
         String password = pwBox.getText();
 
@@ -119,6 +124,11 @@ public class LoginScreen extends Application
         // TODO: comment this out after testing
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
+    }
+
+    private void exit()
+    {
+        // set the exit procedure
     }
 
     private DatabaseAPI setDatabaseAccess(String username, String password)
