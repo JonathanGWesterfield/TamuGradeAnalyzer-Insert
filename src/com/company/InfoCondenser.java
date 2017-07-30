@@ -11,7 +11,6 @@ the database possible
    After information has been condensed, it is put into another*/
 public class InfoCondenser
 {
-    private int numIterations = 0;
     private int courseNum, sectionNum, year, numA, numB, numC, numD, numF, numQdrop;
     private double avgGPA, avgCourseGPA;
     private String subject, professor, semester;
@@ -72,7 +71,6 @@ public class InfoCondenser
         {
             System.err.println("The GradeData.dat file could not be opened to be condensed");
             e.printStackTrace();
-            System.exit(0);
         }
         return outputFilename;
     }
@@ -126,7 +124,6 @@ public class InfoCondenser
         year = Integer.parseInt(strArray[5]);
         // System.out.println("Semester: " + semester + "\nYear: " + year);
         // System.out.println();
-        numIterations++;
     }
     // extracts course information (not grades) to be put into condensed .dat file
     private void classInfoExtractor(String data, StringTokenizer tokenizer,
@@ -240,4 +237,3 @@ public class InfoCondenser
         }
     }
 }
-//DON'T INCLUDE SECTION NUMBERS 200 (HONORS SECTIONS) IN THE TABLE

@@ -39,10 +39,10 @@ public class LoginScreen extends Application
 {
     private GridPane grid;
     private Scene scene;
-    Button auth;
-    Button cancel;
-    TextField userTextField;
-    PasswordField pwBox;
+    private Button auth;
+    private Button cancel;
+    private TextField userTextField;
+    private PasswordField pwBox;
 
     // private String username;
     // private String password;
@@ -71,6 +71,27 @@ public class LoginScreen extends Application
         return scene;
     }
 
+    public Button getCancel()
+    {
+        return cancel;
+    }
+
+    public Button getAuth()
+    {
+        return auth;
+    }
+
+    public TextField getUserTextField()
+    {
+        return userTextField;
+    }
+
+    public PasswordField getPwBox()
+    {
+        return pwBox;
+    }
+
+
     private void setGrid()
     {
         //TODO: update database on Desktop to match laptop
@@ -98,10 +119,8 @@ public class LoginScreen extends Application
         grid.add(pwBox, 1, 2);
 
         auth = new Button("Authenticate");
-        auth.setOnAction(e -> setUsernamePassword());
 
         cancel = new Button("Cancel");
-        cancel.setOnAction(e -> exit());
 
         HBox hbauth = new HBox(10);
         hbauth.setAlignment(Pos.BOTTOM_RIGHT);
@@ -114,43 +133,5 @@ public class LoginScreen extends Application
         scene = new Scene(grid, 300, 275);
     }
 
-    private void setUsernamePassword()
-    {
-        auth.setTextFill(Color.FIREBRICK);
-        String username = userTextField.getText();
-        String password = pwBox.getText();
 
-        setDatabaseAccess(username, password);
-
-        // TODO: comment this out after testing
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-    }
-
-    private void exit()
-    {
-        // set the exit procedure
-    }
-
-    private DatabaseAPI setDatabaseAccess(String username, String password)
-    {
-        // TODO: make the databse connection a private data member. won't be able to pass this object to a different class
-        try
-        {
-            DatabaseAPI db = new DatabaseAPI(username, password);
-            System.out.println("Admin Database connection established");
-            return db;
-        }
-        catch (SQLException e)
-        {
-            AlertError.showSQLException();
-        }
-        catch (ClassNotFoundException e)
-        {
-            AlertError.showClassNotFoundException();
-        }
-
-        System.err.println("The database connection could not be made");
-        return null; // only returns this if the Database connection could not be made
-    }
 }

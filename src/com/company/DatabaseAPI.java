@@ -23,16 +23,17 @@ import java.io.*;
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
-    private String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
-    private String username = "DefaultUser"; // default username
     private Connection conn;
 
     // class constructor that throws an exception to the function caller
     DatabaseAPI() throws java.sql.SQLException, java.lang.ClassNotFoundException
     {
+        System.out.println("Default constructor called");
+        /*String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
+        String username = "DefaultUser"; // default username
         Class.forName("com.mysql.jdbc.Driver");
-        this.conn = DriverManager.getConnection(connectionString, this.username, this.password);
-        System.out.println("Database connection established");
+        this.conn = DriverManager.getConnection(connectionString, username, password);
+        System.out.println("Database connection established");*/
     }
 
     DatabaseAPI(String username, String password) throws java.sql.SQLException, java.lang.ClassNotFoundException
@@ -120,8 +121,9 @@ public class DatabaseAPI
                     + numA + ", " + numB + ", " + numC + ", " + numD + ", " + numF
                     + ", " + numQdrop + ", \"" + termSemester + "\", " + termYear + ", " + honors + ") ";
             System.out.println("Inserting query\n" + query);
-            PreparedStatement insertStatement = conn.prepareStatement(query);
+            PreparedStatement insertStatement = this.conn.prepareStatement(query);
             insertStatement.execute();
+            System.out.println("Query Inserted");
         }
         catch(SQLException e)
         {
@@ -155,7 +157,7 @@ public class DatabaseAPI
     public void closeDBConn() throws SQLException
     {
         System.out.println("\nClosing Database connection");
-        conn.close();
+        this.conn.close();
         System.out.println("\nDatabase connection closed");
     }
 
