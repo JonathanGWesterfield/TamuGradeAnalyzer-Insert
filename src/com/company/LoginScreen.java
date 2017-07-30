@@ -73,6 +73,7 @@ public class LoginScreen extends Application
 
     private void setGrid()
     {
+        //TODO: update database on Desktop to match laptop
         grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

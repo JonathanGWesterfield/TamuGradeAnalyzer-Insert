@@ -32,6 +32,7 @@ public class Main  {
 
     public static void main(String[] args)
     {
+        // TODO: figure out how to use the login screen I made
         try
         {
             String strippedTextFilename = PDFReader.loadPDF();
