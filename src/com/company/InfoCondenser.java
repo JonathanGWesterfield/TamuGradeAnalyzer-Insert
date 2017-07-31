@@ -78,6 +78,7 @@ public class InfoCondenser
     // gets number of A's, B's, C's, D's, F's, and Q drops
     private void gradeInfoExtractor(String data, StringTokenizer tokenizer,
                                     PrintWriter condensedFile)
+    //TODO: possibly redo functions to sanitize inputs better
     {
         int[] intArray = new int[12];
         for(int i = 0; i < 12; i++)
@@ -135,28 +136,31 @@ public class InfoCondenser
             contents.add(tokenizer.nextToken());
         }
 
-        subject = contents.get(0);
-        courseNum = Integer.parseInt(contents.get(1));
-        sectionNum = Integer.parseInt(contents.get(2));
-        avgGPA = Double.parseDouble(contents.get(3));
-        if(contents.size() == 7)
+        //TODO: verify that all of the files were read correctly possibly redo SQL queries
+        try
         {
-            professor = contents.get(4);
-            professor += "-" + contents.get(5);
-            // professor += " " + contents.get(6);
-        }
-        else if(contents.size() == 8)
-        {
-            professor = contents.get(4);
-            professor += "-" + contents.get(5);
-            professor += "-" + contents.get(6);
-            // professor += " " + contents.get(7);
-        }
-        else
-        {
-            professor = contents.get(4);
-            //  professor += " " + contents.get(5);
-        }
+            subject = contents.get(0);
+            courseNum = Integer.parseInt(contents.get(1));
+            sectionNum = Integer.parseInt(contents.get(2));
+            avgGPA = Double.parseDouble(contents.get(3));
+            if(contents.size() == 7)
+            {
+                professor = contents.get(4);
+                professor += "-" + contents.get(5);
+                // professor += " " + contents.get(6);
+            }
+            else if(contents.size() == 8)
+            {
+                professor = contents.get(4);
+                professor += "-" + contents.get(5);
+                professor += "-" + contents.get(6);
+                // professor += " " + contents.get(7);
+            }
+            else
+            {
+                professor = contents.get(4);
+                //  professor += " " + contents.get(5);
+            }
 
         /* System.out.println("subject: " + subject);
         System.out.println("Course Num: " + courseNum);
@@ -165,10 +169,21 @@ public class InfoCondenser
         System.out.println("Professor: " + professor);
         System.out.println(); */
 
-        condensedFile.print(subject + ";" + courseNum + ";" + sectionNum + ";" + avgGPA
-                + ";" + professor + ";");
-        System.out.print(subject + ";" + courseNum + ";" + sectionNum + ";" + avgGPA
-                + ";" + professor + ";");
+            condensedFile.print(subject + ";" + courseNum + ";" + sectionNum + ";" + avgGPA
+                    + ";" + professor + ";");
+            System.out.print(subject + ";" + courseNum + ";" + sectionNum + ";" + avgGPA
+                    + ";" + professor + ";");
+        }
+        catch (NumberFormatException e) // this is for if the inputs are bad
+        {
+            System.err.println("Couldn't Analyze this line");
+            for(int i = 0; i < contents.size(); i++)
+            {
+                System.err.println(contents.get(i));
+            }
+            return;
+        }
+
     }
 
     // this function was in the main function. Unpacks the condensed info and then uses
