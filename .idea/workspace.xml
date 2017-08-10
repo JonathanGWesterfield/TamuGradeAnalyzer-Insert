@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5f702b2-2747-406d-9cac-c0c96df200c4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/CondensedData.dat" afterPath="$PROJECT_DIR$/resources/CondensedData.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/GradeData.dat" afterPath="$PROJECT_DIR$/resources/GradeData.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/PDFMatchVerification.dat" afterPath="$PROJECT_DIR$/resources/PDFMatchVerification.dat" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
