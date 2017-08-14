@@ -22,7 +22,8 @@ import java.io.*;
 
 public class DatabaseAPI
 {
-    private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
+    private String connectionString = "jdbc:mysql://tamudata.cgmm1m5yk0wt.us-east-2." +
+            "rds.amazonaws.com:3306/TamuData";
     private Connection conn;
 
     // class constructor that throws an exception to the function caller
